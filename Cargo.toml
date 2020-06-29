@@ -1,0 +1,17 @@
+[package]
+name = "promo_fin"
+version = "0.1.0"
+authors = ["the_r"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+lopdf = "0.23.0"
+zip = "0.5.6"
+
+[dependencies.promo_input]
+git = "ssh://git@github.com/RedHelmut/promo_input.git"
+
+[dependencies.backfat]
+git = "ssh://git@github.com/RedHelmut/backfat.git"
