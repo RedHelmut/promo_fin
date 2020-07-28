@@ -7,15 +7,34 @@ use backfat::container::rectangle::Border;
 use std::cell::RefCell;
 use backfat::font::font_sizes::{Font, create_font_recource_id};
 use backfat::container::manager::Manager;
-use backfat::container_objects::PdfDrawInfo;
 use lopdf::{Stream, Object};
-use lopdf::content::Content;
+use lopdf::content::{Content, Operation};
 use lopdf::dictionary;
 use std::io::{Write};
+use backfat::container::container_trait::DrawInfoReq;
+
+pub struct PdfDrawInfo {
+    pub pdf: Vec<Vec<Operation>>,
+}
+impl DrawInfoReq for PdfDrawInfo {
+    fn increment_page_buffer(&mut self, page_number: usize) {
+        if page_number >= self.page_array_size() {
+            self.pdf.resize(page_number + 1, Vec::new());
+        }
+    }
+
+    fn page_array_size(&self) -> usize {
+        self.pdf.len()
+    }
+
+    fn insert_into_page(&mut self, page_num: usize, operation: Operation) {
+        self.pdf[page_num].push(operation);
+    }
+}
 
 pub fn write_rows_to_pdf_container<W:Write>(
     customer: &String,
-    promo_number: usize,
+    _: usize,
     times_qualified: i64,
     data: Vec<Vec<Vec<String>>>,
     save_to: &mut W

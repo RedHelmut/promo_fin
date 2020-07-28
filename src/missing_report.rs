@@ -589,7 +589,6 @@ fn write_missing_report_to_pdf_new( placement_range: Range<usize>,
 
 use std::cell::RefCell;
 use backfat::container::rectangle::{Border};
-use backfat::container_objects::PdfDrawInfo;
 use backfat::container_objects::text_box::{TextBox, TextAlignment};
 use backfat::font::font_info::FontInfo;
 use backfat::font::font_sizes::{Font, create_font_recource_id};
@@ -601,7 +600,7 @@ use backfat::container::placement_info::PlacementInfo;
 use promo_input::general::promo_json::{Promotion, PromoSection};
 use promo_input::general::and_or::AndOrType;
 use promo_input::general::data::load_promo;
-use crate::pdf::write_rows_to_pdf_container;
+use crate::pdf::{write_rows_to_pdf_container, PdfDrawInfo};
 
 
 pub fn run_missing_reports<W: Write>(
