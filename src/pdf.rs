@@ -104,7 +104,7 @@ pub fn write_rows_to_pdf_container<W:Write>(
         let trans_data = data[cur_db_rows_index].clone().into_iter().map(|x| RowData::new(x,RowDataTypes::default())).collect::<Vec<RowData>>();
         let dta = RowData::new(header.clone(),RowDataTypes::default());
         let trans_header = Some(&dta);
-        let mut list_box = ListBox::new(&trans_data, col_size.clone(), trans_header, &mut pdf_manager, FontInfo::new(10.0,Font::Courier), FontInfo::new(12.0, Font::Helvetica), ListBoxBorder::All(1.4,1.4), None);
+        let mut list_box = ListBox::new(&trans_data, col_size.clone(), trans_header, &mut pdf_manager, FontInfo::new(10.0,Font::Helvetica), FontInfo::new(12.0, Font::Helvetica), ListBoxBorder::All(1.4,1.4), None);
 
         list_box.set_item_column_alignments(data_column_alignment);
         list_box.set_header_column_alignments(vec![TextAlignment::LeftJustifyCenter(0.05);header.len()]);
